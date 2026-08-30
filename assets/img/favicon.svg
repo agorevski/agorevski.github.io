@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Signal node mark">
+  <rect width="256" height="256" rx="56" fill="#0a0e14"/>
+  <g stroke="#3ddc97" stroke-width="9" stroke-linecap="round">
+    <line x1="128" y1="128" x2="128" y2="51"/>
+    <line x1="128" y1="128" x2="197" y2="167"/>
+    <line x1="128" y1="128" x2="59" y2="167"/>
+    <line x1="128" y1="51" x2="197" y2="167" stroke-opacity="0.45"/>
+    <line x1="197" y1="167" x2="59" y2="167" stroke-opacity="0.45"/>
+    <line x1="59" y1="167" x2="128" y2="51" stroke-opacity="0.45"/>
+  </g>
+  <circle cx="128" cy="128" r="19" fill="#f2a93b"/>
+  <circle cx="128" cy="51" r="15" fill="#3ddc97"/>
+  <circle cx="197" cy="167" r="15" fill="#3ddc97"/>
+  <circle cx="59" cy="167" r="15" fill="#3ddc97"/>
+</svg>
