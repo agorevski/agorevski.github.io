@@ -384,6 +384,15 @@ kbd.kbd {
   background: var(--mint);
   box-shadow: 0 0 0 4px rgba(61, 220, 151, 0.18);
 }
+.hero__status--muted {
+  color: var(--ivory-faint);
+  border-color: var(--line-strong);
+  background: rgba(245, 241, 230, 0.04);
+}
+.hero__status--muted .dot {
+  background: var(--ivory-faint);
+  box-shadow: 0 0 0 4px rgba(138, 133, 119, 0.16);
+}
 .hero__title {
   margin-top: 1.1rem;
   font-size: clamp(2.3rem, 6vw, 3.6rem);

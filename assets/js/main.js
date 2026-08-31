@@ -307,7 +307,7 @@
         scrollToId(commandTargets[cmd]);
         print("Navigating to <code>#" + commandTargets[cmd] + "</code>…");
       } else if (cmd === "whoami") {
-        print("Principal / Senior Software Developer — distributed systems &amp; applied AI.");
+        print("Principal Machine Learning Engineer @ Zoom — distributed systems, data platforms &amp; applied AI. Status: not available for opportunities.");
       } else {
         print("Unknown command: <code>" + cmd.replace(/</g, "&lt;") + "</code>. Try <code>help</code>.");
       }
