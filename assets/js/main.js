@@ -40,6 +40,11 @@
         applyMotionState(!motionEnabled(), true);
       });
     }
+    if (reduceMotionQuery.addEventListener) {
+      reduceMotionQuery.addEventListener("change", function () {
+        if (!storedMotionPref()) { applyMotionState(!reduceMotionQuery.matches, false); }
+      });
+    }
   })();
 
   /* ============================= Pointer capability ============================= */
@@ -69,6 +74,7 @@
     var canvas = document.getElementById("signal-canvas");
     if (!canvas || !canvas.getContext) { return; }
     var ctx = canvas.getContext("2d");
+    if (!ctx) { return; }
     var nodes = [];
     var width = 0, height = 0, dpr = 1;
     var running = false;
@@ -194,23 +200,6 @@
     hero.addEventListener("pointerleave", function () { glow.classList.remove("is-active"); });
   })();
 
-  /* ============================= Card tilt (fine pointer only) ============================= */
-  (function cardTilt() {
-    var cards = document.querySelectorAll(".system-card");
-    cards.forEach(function (card) {
-      function onMove(e) {
-        if (!finePointerQuery.matches || !motionEnabled()) { return; }
-        var rect = card.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width - 0.5;
-        var py = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = "perspective(800px) rotateX(" + (py * -4) + "deg) rotateY(" + (px * 6) + "deg)";
-      }
-      function onLeave() { card.style.transform = ""; }
-      card.addEventListener("pointermove", onMove);
-      card.addEventListener("pointerleave", onLeave);
-    });
-  })();
-
   /* ============================= Scroll progress + active section ============================= */
   (function scrollTracking() {
     var bar = document.getElementById("progressBar");
@@ -279,59 +268,6 @@
     }
   }
 
-  /* ============================= Hero console ============================= */
-  (function heroConsole() {
-    var log = document.getElementById("consoleLog");
-    var form = document.getElementById("consoleForm");
-    var input = document.getElementById("consoleInput");
-    if (!log || !form || !input) { return; }
-
-    var commandTargets = { about: "about", work: "systems", experience: "experience", contact: "contact" };
-
-    function print(text) {
-      var li = document.createElement("li");
-      li.innerHTML = text;
-      log.appendChild(li);
-      log.scrollTop = log.scrollHeight;
-    }
-
-    function runCommand(raw) {
-      var cmd = (raw || "").trim().toLowerCase();
-      if (!cmd) { return; }
-      print("<code>&gt; " + cmd.replace(/</g, "&lt;") + "</code>");
-      if (cmd === "help") {
-        print("Commands: about · work · experience · contact · clear");
-      } else if (cmd === "clear") {
-        log.innerHTML = "";
-      } else if (commandTargets[cmd]) {
-        scrollToId(commandTargets[cmd]);
-        print("Navigating to <code>#" + commandTargets[cmd] + "</code>…");
-      } else if (cmd === "whoami") {
-        print("Principal Machine Learning Engineer @ Zoom — distributed systems, data platforms &amp; applied AI. Status: not available for opportunities.");
-      } else {
-        print("Unknown command: <code>" + cmd.replace(/</g, "&lt;") + "</code>. Try <code>help</code>.");
-      }
-    }
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      runCommand(input.value);
-      input.value = "";
-    });
-
-    document.querySelectorAll(".console__quick a[data-cmd]").forEach(function (link) {
-      link.addEventListener("click", function (e) {
-        // Let the real anchor navigation happen (works without JS); just also log it.
-        var cmd = link.getAttribute("data-cmd");
-        window.setTimeout(function () { print("Navigating to <code>#" + commandTargets[cmd] + "</code>…"); }, 0);
-        if (motionEnabled()) {
-          e.preventDefault();
-          scrollToId(commandTargets[cmd]);
-        }
-      });
-    });
-  })();
-
   /* ============================= Capability matrix filters ============================= */
   (function matrixFilters() {
     var group = document.getElementById("matrixFilters");
@@ -367,20 +303,37 @@
   })();
 
   /* ============================= Copy-to-clipboard ============================= */
+  var copyStatus = document.createElement("p");
+  copyStatus.className = "sr-only";
+  copyStatus.setAttribute("role", "status");
+  document.body.appendChild(copyStatus);
+
+  function copyText(value, button) {
+    var original = button ? button.textContent : "";
+    if (button) { button.disabled = true; }
+    copyStatus.textContent = "";
+    function finish(copied) {
+      var message = copied ? "Copied!" : "Copy unavailable. Please copy the email address manually.";
+      copyStatus.textContent = message;
+      if (button) {
+        button.textContent = copied ? message : "Copy unavailable";
+        window.setTimeout(function () {
+          button.textContent = original;
+          button.disabled = false;
+        }, 2400);
+      }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(function () { finish(true); }, function () { finish(false); });
+    } else {
+      finish(false);
+    }
+  }
+
   (function copyButtons() {
     document.querySelectorAll("[data-copy]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        var value = btn.getAttribute("data-copy");
-        var done = function () {
-          var original = btn.textContent;
-          btn.textContent = "Copied!";
-          window.setTimeout(function () { btn.textContent = original; }, 1800);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(value).then(done).catch(done);
-        } else {
-          done();
-        }
+        copyText(btn.getAttribute("data-copy"), btn);
       });
     });
   })();
@@ -410,14 +363,15 @@
 
     var items = [
       { label: "Home", hint: "section", go: "home" },
-      { label: "Mission Brief", hint: "section", go: "about" },
-      { label: "Selected Systems", hint: "section", go: "systems" },
-      { label: "Experience Flightpath", hint: "section", go: "experience" },
-      { label: "Capability Matrix", hint: "section", go: "matrix" },
+      { label: "About", hint: "section", go: "about" },
+      { label: "Selected Work", hint: "section", go: "systems" },
+      { label: "Experience", hint: "section", go: "experience" },
+      { label: "Expertise", hint: "section", go: "matrix" },
       { label: "Field Notes", hint: "section", go: "notes" },
-      { label: "Contact / Handoff", hint: "section", go: "contact" },
+      { label: "Contact", hint: "section", go: "contact" },
+      { label: "View resume (PDF)", hint: "document", url: "/assets/docs/Alex_Gorevski_Resume_2025.pdf" },
       { label: "Toggle motion effects", hint: "action", run: function () { document.getElementById("motionToggle").click(); } },
-      { label: "Copy email address", hint: "action", run: function () { navigator.clipboard && navigator.clipboard.writeText("admin@alexgorevski.com"); } },
+      { label: "Copy email address", hint: "action", run: function () { copyText("admin@alexgorevski.com"); } },
       { label: "Open GitHub profile", hint: "external", url: "https://github.com/agorevski/" },
       { label: "Open LinkedIn profile", hint: "external", url: "https://www.linkedin.com/in/alexgorevski/" },
       { label: "Email admin@alexgorevski.com", hint: "external", url: "mailto:admin@alexgorevski.com" }
@@ -514,4 +468,5 @@
     });
   })();
 
+  root.classList.add("js-ready");
 })();
