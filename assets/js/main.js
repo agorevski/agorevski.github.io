@@ -321,6 +321,7 @@
   copyStatus.className = "sr-only";
   copyStatus.setAttribute("role", "status");
   document.body.appendChild(copyStatus);
+  var COPY_FEEDBACK_MS = 2400;
 
   function copyText(value, button) {
     var original = button ? button.textContent : "";
@@ -334,7 +335,7 @@
         window.setTimeout(function () {
           button.textContent = original;
           button.disabled = false;
-        }, 2400);
+        }, COPY_FEEDBACK_MS);
       }
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
