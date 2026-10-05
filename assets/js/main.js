@@ -85,6 +85,12 @@
     var AREA_PER_NODE = 22000;
     var MAX_DPR = 1.5;
     var LINK_DIST = 150;
+    var NODE_SPEED = 0.25; // max drift px per frame
+    var NODE_RADIUS = 1.6;
+    var LINK_ALPHA = 0.35; // opacity at zero distance
+    var LINK_RGB = "61, 220, 151"; // --mint as an rgb triplet
+    var NODE_FILL = "rgba(242, 169, 59, 0.55)"; // --amber, dimmed
+    var RESIZE_DEBOUNCE_MS = 150;
 
     function nodeCountForViewport() {
       var area = window.innerWidth * window.innerHeight;
@@ -110,8 +116,8 @@
         nodes.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.25,
-          vy: (Math.random() - 0.5) * 0.25
+          vx: (Math.random() - 0.5) * NODE_SPEED,
+          vy: (Math.random() - 0.5) * NODE_SPEED
         });
       }
     }
@@ -131,8 +137,8 @@
           var dy = nodes[a].y - nodes[b].y;
           var dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < LINK_DIST) {
-            var alpha = (1 - dist / LINK_DIST) * 0.35;
-            ctx.strokeStyle = "rgba(61, 220, 151, " + alpha + ")";
+            var alpha = (1 - dist / LINK_DIST) * LINK_ALPHA;
+            ctx.strokeStyle = "rgba(" + LINK_RGB + ", " + alpha + ")";
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[a].x, nodes[a].y);
@@ -142,9 +148,9 @@
         }
       }
       for (var c = 0; c < nodes.length; c++) {
-        ctx.fillStyle = "rgba(242, 169, 59, 0.55)";
+        ctx.fillStyle = NODE_FILL;
         ctx.beginPath();
-        ctx.arc(nodes[c].x, nodes[c].y, 1.6, 0, Math.PI * 2);
+        ctx.arc(nodes[c].x, nodes[c].y, NODE_RADIUS, 0, Math.PI * 2);
         ctx.fill();
       }
       rafId = window.requestAnimationFrame(step);
@@ -165,7 +171,7 @@
     var resizeTimer = null;
     window.addEventListener("resize", function () {
       window.clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(resize, 150);
+      resizeTimer = window.setTimeout(resize, RESIZE_DEBOUNCE_MS);
     });
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) { stop(); } else { start(); }
