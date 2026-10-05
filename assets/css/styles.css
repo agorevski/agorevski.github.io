@@ -157,11 +157,6 @@ html:not(.js-ready) :is(#paletteTrigger, #motionToggle, #matrixFilters, [data-co
   letter-spacing: -0.05em;
   margin-top: 1rem;
 }
-.section__lede {
-  max-width: 62ch;
-  color: var(--ivory-dim);
-  font-size: 1.05rem;
-}
 .section__note {
   font-size: 0.92rem;
   color: var(--ivory-dim);
@@ -969,12 +964,6 @@ img.hero__portrait {
   .flight-stop__role { grid-column: 2; grid-row: 1; margin-top: 0; }
   .flight-stop__desc { grid-column: 2; grid-row: 2 / span 2; margin-top: 0; }
 }
-.flightpath__footnote {
-  margin-top: 1.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--ivory-faint);
-}
 
 /* ============================= Education ============================= */
 .education-card {
@@ -1056,13 +1045,6 @@ img.hero__portrait {
   color: var(--ivory-dim);
   transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
 }
-.skill-tag.is-match {
-  border-color: var(--mint-dim);
-  color: var(--mint-strong);
-  background: rgba(138, 230, 197, 0.07);
-}
-.skill-tag.is-dim { color: var(--ivory-faint); }
-
 /* ============================= Field notes (interests) ============================= */
 .notes-grid {
   display: grid;
