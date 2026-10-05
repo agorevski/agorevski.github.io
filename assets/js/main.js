@@ -206,6 +206,7 @@
     var sections = document.querySelectorAll("main section[id], main .hero[id]");
     var navLinks = document.querySelectorAll(".primary-nav__list a[href^='#']");
 
+    var ticking = false;
     function updateProgress() {
       var doc = document.documentElement;
       var scrollTop = window.scrollY || doc.scrollTop;
@@ -213,9 +214,12 @@
       var pct = height > 0 ? (scrollTop / height) * 100 : 0;
       if (bar) { bar.style.width = pct + "%"; }
     }
-    window.addEventListener("scroll", function () {
-      window.requestAnimationFrame(updateProgress);
-    }, { passive: true });
+    function requestProgressUpdate() {
+      if (ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(function () { updateProgress(); ticking = false; });
+    }
+    window.addEventListener("scroll", requestProgressUpdate, { passive: true });
     updateProgress();
 
     if ("IntersectionObserver" in window && sections.length) {
