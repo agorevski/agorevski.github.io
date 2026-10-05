@@ -577,7 +577,6 @@ html.motion-off .btn { transition: none; }
 }
 .hero__visual-caption span { display: block; }
 .hero__visual-caption span:first-child { color: var(--ivory); margin-bottom: 0.15rem; }
-.hero__visual-caption strong { color: var(--ivory); font-weight: 500; }
 .hero__orbit {
   position: absolute;
   width: 100px;
@@ -786,11 +785,6 @@ html.motion-off .btn { transition: none; }
   margin-top: 0.7rem;
   color: var(--ivory-dim);
   font-size: 0.95rem;
-}
-.system-card .details-body img {
-  margin-top: 0.8rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--line);
 }
 @media (min-width: 1200px) {
   .systems-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
