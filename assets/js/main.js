@@ -50,7 +50,6 @@
   /* ============================= Pointer capability ============================= */
   function updatePointerClass() {
     root.classList.toggle("has-fine-pointer", finePointerQuery.matches);
-    root.classList.toggle("no-fine-pointer", !finePointerQuery.matches);
   }
   updatePointerClass();
   if (finePointerQuery.addEventListener) {
