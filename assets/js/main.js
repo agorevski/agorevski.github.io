@@ -347,8 +347,9 @@
   (function backToTop() {
     var btn = document.getElementById("toTop");
     if (!btn) { return; }
+    var SHOW_AFTER_PX = 800;
     window.addEventListener("scroll", function () {
-      btn.classList.toggle("is-visible", window.scrollY > 800);
+      btn.classList.toggle("is-visible", window.scrollY > SHOW_AFTER_PX);
     }, { passive: true });
     btn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: motionEnabled() ? "smooth" : "auto" });
