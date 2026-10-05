@@ -23,7 +23,6 @@
   }
   function applyMotionState(enabled, persist) {
     root.classList.toggle("motion-off", !enabled);
-    root.classList.toggle("motion-user-on", enabled);
     var btn = document.getElementById("motionToggle");
     var label = document.getElementById("motionToggleLabel");
     if (btn) { btn.setAttribute("aria-pressed", String(enabled)); }
