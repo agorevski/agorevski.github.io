@@ -298,7 +298,7 @@
         var match = filter === "all" || cat.getAttribute("data-cat") === filter;
         cat.style.display = match ? "" : "none";
         if (match) {
-          cat.querySelectorAll(".skill-tag").forEach(function () { visibleSkills++; });
+          visibleSkills += cat.querySelectorAll(".skill-tag").length;
         }
       });
       if (status) {
