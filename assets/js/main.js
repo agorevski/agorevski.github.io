@@ -219,9 +219,8 @@
 
     var ticking = false;
     function updateProgress() {
-      var doc = document.documentElement;
-      var scrollTop = window.scrollY || doc.scrollTop;
-      var height = doc.scrollHeight - doc.clientHeight;
+      var scrollTop = window.scrollY || root.scrollTop;
+      var height = root.scrollHeight - root.clientHeight;
       var pct = height > 0 ? (scrollTop / height) * 100 : 0;
       if (bar) { bar.style.width = pct + "%"; }
     }
