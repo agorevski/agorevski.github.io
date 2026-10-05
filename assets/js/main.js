@@ -64,8 +64,9 @@
   /* ============================= Years-of-experience readout ============================= */
   var yearsEl = document.getElementById("yearsExperience");
   if (yearsEl) {
-    var start = new Date(2008, 5, 2);
-    var years = (Date.now() - start.getTime()) / (365.25 * 24 * 60 * 60 * 1000);
+    var CAREER_START = new Date(2008, 5, 2); // June 2008
+    var MS_PER_YEAR = 365.25 * 24 * 60 * 60 * 1000;
+    var years = (Date.now() - CAREER_START.getTime()) / MS_PER_YEAR;
     yearsEl.textContent = Math.floor(years) + "+ yrs";
   }
 
