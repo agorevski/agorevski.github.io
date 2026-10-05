@@ -81,15 +81,18 @@
     var running = false;
     var rafId = null;
     var MAX_NODES = 70;
+    var MIN_NODES = 18;
+    var AREA_PER_NODE = 22000;
+    var MAX_DPR = 1.5;
     var LINK_DIST = 150;
 
     function nodeCountForViewport() {
       var area = window.innerWidth * window.innerHeight;
-      return Math.max(18, Math.min(MAX_NODES, Math.round(area / 22000)));
+      return Math.max(MIN_NODES, Math.min(MAX_NODES, Math.round(area / AREA_PER_NODE)));
     }
 
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width * dpr;
