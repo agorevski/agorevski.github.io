@@ -703,24 +703,6 @@ img.hero__portrait {
 .system-card:hover, .system-card:focus-within { border-color: var(--mint-dim); background-color: var(--ink-2); }
 .system-card:hover::before, .system-card:focus-within::before { opacity: 1; }
 .system-card--featured { background: linear-gradient(125deg, #192c35, var(--ink-1) 75%); border-color: var(--mint-dim); }
-.system-card__preview {
-  margin: 2rem 0 0;
-  min-width: 0;
-}
-.system-card__preview picture {
-  display: block;
-  overflow: hidden;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-}
-.system-card__preview img { width: 100%; height: auto; }
-.system-card__preview figcaption {
-  margin-top: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--ivory-faint);
-}
 .system-card__number {
   color: var(--ivory-faint);
   font-family: var(--font-mono);
@@ -749,10 +731,6 @@ img.hero__portrait {
   letter-spacing: 0.08em;
   color: var(--mint);
   max-width: 42ch;
-}
-.system-card__logo {
-  height: 32px;
-  width: auto;
 }
 .system-card h3 {
   margin-top: 1.75rem;
@@ -824,7 +802,6 @@ img.hero__portrait {
     align-items: center;
     gap: 3rem;
   }
-  .system-card--featured .system-card__preview { margin-top: 0; }
   .system-card--featured p.summary { max-width: 72ch; }
   .system-card--featured .details-body { max-width: 80ch; }
   .system-card--featured h3 { font-size: 2.5rem; }
