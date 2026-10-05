@@ -628,25 +628,6 @@ img.hero__portrait {
 @media (min-width: 880px) {
   .about__grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
 }
-.about__portrait {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--line-strong);
-  aspect-ratio: 1 / 1;
-  max-width: 340px;
-}
-.about__portrait img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: saturate(0.65) contrast(1.05);
-}
-.about__portrait::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(160deg, rgba(var(--cyan-rgb), 0.12), transparent 70%);
-  mix-blend-mode: screen;
-}
-.about__scanline { display: none; }
 .about__body p + p { margin-top: 1.5rem; }
 .about__body { color: var(--ivory-dim); font-size: 1.05rem; line-height: 1.85; }
 .about__grid--text .about__body { max-width: 66ch; }
