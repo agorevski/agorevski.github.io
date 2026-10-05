@@ -88,8 +88,9 @@
     var NODE_SPEED = 0.25; // max drift px per frame
     var NODE_RADIUS = 1.6;
     var LINK_ALPHA = 0.35; // opacity at zero distance
-    var LINK_RGB = "61, 220, 151"; // --mint as an rgb triplet
-    var NODE_FILL = "rgba(242, 169, 59, 0.55)"; // --amber, dimmed
+    var palette = getComputedStyle(root);
+    var LINK_RGB = palette.getPropertyValue("--mint-rgb").trim();
+    var NODE_FILL = "rgba(" + palette.getPropertyValue("--amber-rgb").trim() + ", 0.55)";
     var RESIZE_DEBOUNCE_MS = 150;
 
     function nodeCountForViewport() {
