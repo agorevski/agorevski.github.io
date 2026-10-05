@@ -365,6 +365,8 @@
     var list = document.getElementById("paletteList");
     if (!palette || !trigger || !input || !list) { return; }
 
+    var EMAIL = "admin@alexgorevski.com";
+
     var items = [
       { label: "Home", hint: "section", go: "home" },
       { label: "About", hint: "section", go: "about" },
@@ -375,10 +377,10 @@
       { label: "Contact", hint: "section", go: "contact" },
       { label: "View resume (PDF)", hint: "document", url: "/assets/docs/Alex_Gorevski_Resume_2025.pdf" },
       { label: "Toggle motion effects", hint: "action", run: function () { document.getElementById("motionToggle").click(); } },
-      { label: "Copy email address", hint: "action", run: function () { copyText("admin@alexgorevski.com"); } },
+      { label: "Copy email address", hint: "action", run: function () { copyText(EMAIL); } },
       { label: "Open GitHub profile", hint: "external", url: "https://github.com/agorevski/" },
       { label: "Open LinkedIn profile", hint: "external", url: "https://www.linkedin.com/in/alexgorevski/" },
-      { label: "Email admin@alexgorevski.com", hint: "external", url: "mailto:admin@alexgorevski.com" }
+      { label: "Email " + EMAIL, hint: "external", url: "mailto:" + EMAIL }
     ];
 
     var activeIndex = -1;
