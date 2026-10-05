@@ -422,7 +422,12 @@
         li.setAttribute("role", "option");
         li.id = "palette-opt-" + i;
         li.setAttribute("aria-selected", String(i === 0));
-        li.innerHTML = "<span>" + item.label + "</span><span class=\"hint\">" + item.hint + "</span>";
+        var labelEl = document.createElement("span");
+        labelEl.textContent = item.label;
+        var hintEl = document.createElement("span");
+        hintEl.className = "hint";
+        hintEl.textContent = item.hint;
+        li.appendChild(labelEl).appendChild(hintEl);
         li.addEventListener("click", function () { activate(item); });
         list.appendChild(li);
       });
