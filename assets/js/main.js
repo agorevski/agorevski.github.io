@@ -11,6 +11,10 @@
   var finePointerQuery = window.matchMedia("(pointer: fine)");
   var MOTION_KEY = "ago-motion";
 
+  function onMediaChange(query, handler) {
+    if (query.addEventListener) { query.addEventListener("change", handler); }
+  }
+
   /* ============================= Motion preference ============================= */
   function storedMotionPref() {
     try { return window.localStorage.getItem(MOTION_KEY); } catch (e) { return null; }
@@ -39,11 +43,9 @@
         applyMotionState(!motionEnabled(), true);
       });
     }
-    if (reduceMotionQuery.addEventListener) {
-      reduceMotionQuery.addEventListener("change", function () {
-        if (!storedMotionPref()) { applyMotionState(!reduceMotionQuery.matches, false); }
-      });
-    }
+    onMediaChange(reduceMotionQuery, function () {
+      if (!storedMotionPref()) { applyMotionState(!reduceMotionQuery.matches, false); }
+    });
   })();
 
   /* ============================= Pointer capability ============================= */
@@ -51,9 +53,7 @@
     root.classList.toggle("has-fine-pointer", finePointerQuery.matches);
   }
   updatePointerClass();
-  if (finePointerQuery.addEventListener) {
-    finePointerQuery.addEventListener("change", updatePointerClass);
-  }
+  onMediaChange(finePointerQuery, updatePointerClass);
 
   /* ============================= Footer year ============================= */
   var yearEl = document.getElementById("currentYear");
