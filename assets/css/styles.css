@@ -134,6 +134,7 @@ html:not(.js-ready) :is(#paletteTrigger, #motionToggle, #matrixFilters, [data-co
   gap: 1.5rem 3rem;
   margin-bottom: clamp(2.25rem, 5vw, 3.75rem);
 }
+.section__head--spaced { margin-top: 3rem; }
 .section__kicker {
   display: inline-flex;
   align-items: center;
