@@ -15,6 +15,7 @@
   --line-rgb: 238, 237, 227;
   --mint-rgb: 138, 230, 197;
   --cyan-rgb: 143, 217, 234;
+  --amber-rgb: 217, 188, 137;
   --line: rgba(var(--line-rgb), 0.13);
   --line-strong: rgba(var(--line-rgb), 0.27);
   --ivory: #f3f0e7;
