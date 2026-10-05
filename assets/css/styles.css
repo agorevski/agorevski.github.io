@@ -33,6 +33,7 @@
   --radius: 8px;
   --radius-lg: 12px;
   --max-w: 1380px;
+  --touch-target: 44px; /* WCAG minimum interactive size */
 
   /* Motion (disabled globally via .motion-off / prefers-reduced-motion) */
   --dur-fast: 150ms;
@@ -214,7 +215,7 @@ html.motion-off .hero__glow { display: none; }
   flex-shrink: 0;
   font-weight: 600;
   letter-spacing: -0.025em;
-  min-height: 44px;
+  min-height: var(--touch-target);
   text-decoration: none;
 }
 .brand__mark {
@@ -256,7 +257,7 @@ html.motion-off .hero__glow { display: none; }
   position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--touch-target);
   padding: 0 0.55rem;
   text-decoration: none;
   font-size: 0.8rem;
@@ -289,8 +290,8 @@ html.motion-off .hero__glow { display: none; }
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
   padding: 0 0.7rem;
   background: transparent;
   border: 1px solid var(--line);
@@ -330,8 +331,8 @@ kbd.kbd {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
     background: var(--ink-2);
@@ -806,7 +807,7 @@ img.hero__portrait {
 }
 .system-card summary {
   cursor: pointer;
-  min-height: 44px;
+  min-height: var(--touch-target);
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -883,7 +884,7 @@ img.hero__portrait {
   padding-top: 0.75rem;
 }
 .experience-research summary {
-  min-height: 44px;
+  min-height: var(--touch-target);
   padding-block: 0.5rem;
   color: var(--mint);
 }
@@ -989,7 +990,7 @@ img.hero__portrait {
   margin-bottom: 2rem;
 }
 .chip {
-  min-height: 44px;
+  min-height: var(--touch-target);
   padding: 0 0.9rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line);
@@ -1118,7 +1119,7 @@ img.hero__portrait {
 }
 .contact-field dd a:hover { color: var(--mint); }
 .copy-btn {
-  min-height: 44px;
+  min-height: var(--touch-target);
   padding: 0 0.6rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--line-strong);
@@ -1210,7 +1211,7 @@ img.hero__portrait {
   align-items: center;
   justify-content: space-between;
   gap: 0.6rem;
-  min-height: 44px;
+  min-height: var(--touch-target);
   padding: 0 0.8rem;
   border-radius: var(--radius-sm);
   color: var(--ivory-dim);
@@ -1240,8 +1241,8 @@ img.hero__portrait {
   right: 1.25rem;
   bottom: 1.25rem;
   z-index: 90;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
   border-radius: 50%;
   border: 1px solid var(--line-strong);
   background: var(--ink-1);
