@@ -132,6 +132,7 @@
         if (n.x < 0 || n.x > width) { n.vx *= -1; }
         if (n.y < 0 || n.y > height) { n.vy *= -1; }
       }
+      ctx.lineWidth = 1;
       for (var a = 0; a < nodes.length; a++) {
         for (var b = a + 1; b < nodes.length; b++) {
           var dx = nodes[a].x - nodes[b].x;
@@ -140,7 +141,6 @@
           if (dist < LINK_DIST) {
             var alpha = (1 - dist / LINK_DIST) * LINK_ALPHA;
             ctx.strokeStyle = "rgba(" + LINK_RGB + ", " + alpha + ")";
-            ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(nodes[a].x, nodes[a].y);
             ctx.lineTo(nodes[b].x, nodes[b].y);
@@ -148,8 +148,8 @@
           }
         }
       }
+      ctx.fillStyle = NODE_FILL;
       for (var c = 0; c < nodes.length; c++) {
-        ctx.fillStyle = NODE_FILL;
         ctx.beginPath();
         ctx.arc(nodes[c].x, nodes[c].y, NODE_RADIUS, 0, Math.PI * 2);
         ctx.fill();
