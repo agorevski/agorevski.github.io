@@ -99,7 +99,7 @@ html:not(.js-ready) :is(#paletteTrigger, #motionToggle, #matrixFilters, [data-co
 :focus-visible {
   outline: 2px solid var(--mint-strong);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* Skip link */
@@ -314,7 +314,7 @@ kbd.kbd {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   border: 1px solid var(--line-strong);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   padding: 0.05em 0.4em;
   color: var(--ivory-faint);
 }
