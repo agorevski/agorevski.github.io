@@ -379,10 +379,12 @@
 
     var activeIndex = -1;
     var lastFocused = null;
+    var filteredItems = [];
 
     function renderList(filterText) {
       var q = (filterText || "").trim().toLowerCase();
       var filtered = items.filter(function (item) { return item.label.toLowerCase().indexOf(q) !== -1; });
+      filteredItems = filtered;
       list.innerHTML = "";
       if (!filtered.length) {
         var empty = document.createElement("li");
@@ -404,7 +406,6 @@
       });
       activeIndex = 0;
       input.setAttribute("aria-activedescendant", "palette-opt-0");
-      list._filtered = filtered;
     }
 
     function moveActive(delta) {
@@ -425,8 +426,7 @@
     }
 
     function activateCurrent() {
-      var filtered = list._filtered || [];
-      if (activeIndex >= 0 && filtered[activeIndex]) { activate(filtered[activeIndex]); }
+      if (activeIndex >= 0 && filteredItems[activeIndex]) { activate(filteredItems[activeIndex]); }
     }
 
     function open() {
