@@ -904,13 +904,16 @@ img.hero__portrait {
 /* ============================= Experience flightpath ============================= */
 .flightpath {
   position: relative;
+  --flight-axis: 5.5px; /* shared centerline of the line and dots */
+  --flight-line: 1px;
+  --flight-dot: 11px;
 }
 .flightpath__line {
   position: absolute;
-  left: 5px;
+  left: calc(var(--flight-axis) - var(--flight-line) / 2);
   top: 1rem;
   bottom: 1rem;
-  width: 1px;
+  width: var(--flight-line);
   background: linear-gradient(180deg, var(--mint-dim), var(--line));
 }
 .flightpath__track { display: flex; flex-direction: column; }
@@ -920,8 +923,8 @@ img.hero__portrait {
 }
 .flight-stop__dot {
   position: absolute;
-  left: 0; top: 2.25rem;
-  width: 11px; height: 11px;
+  left: calc(var(--flight-axis) - var(--flight-dot) / 2); top: 2.25rem;
+  width: var(--flight-dot); height: var(--flight-dot);
   border-radius: 50%;
   background: var(--ink);
   border: 2px solid var(--mint-dim);
