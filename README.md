@@ -5,7 +5,7 @@ from this repository (`agorevski.github.io`).
 
 ## Stack
 
-Vanilla HTML, CSS, and JavaScript. No build step, no bundler, no external
+Vanilla HTML, CSS, and JavaScript. No bundler or external
 runtime dependencies (fonts, CDNs, frameworks). Everything renders and
 navigates correctly with JavaScript disabled; the JS in `assets/js/main.js`
 is a progressive-enhancement layer only (canvas signal-network background,
@@ -45,6 +45,31 @@ python3 -m http.server 8080
 
 Then open `http://localhost:8080/`.
 
+## Production delivery
+
+The Pages workflow runs `python3 scripts/build_site.py` and publishes `_site/`,
+not the repository root. The build embeds `assets/css/styles.css` in the
+homepage so the initial render does not wait for a separate stylesheet request.
+Keep editing the source stylesheet; the generated HTML is not committed.
+The source preview above still loads the stylesheet normally.
+
+Only public site files and downloadable PDFs are published; resume sources,
+fonts used to generate the PDF, tests, and development files are excluded.
+To preview the deployed output, run the build and then
+`python3 -m http.server 8080 --directory _site`.
+Repeat the same build command to refresh `_site/`, including removal of obsolete
+generated assets. A generated-file manifest limits cleanup to prior build files;
+unknown files or directories cause a failure without being removed. Existing
+output without a manifest is adopted only if it exactly matches the current
+build. Use `--output _site-preview` for a separate output directory.
+
+GitHub Pages currently serves static assets with `Cache-Control: max-age=600`.
+That cache lifetime is controlled by the host, not HTML or this workflow.
+Inlining the homepage stylesheet and reducing portrait transfer size mitigate
+PageSpeed's cache-lifetime warning, but cannot remove it. Longer-lived asset
+cache headers require a configurable hosting service or a CDN in front of
+the custom domain; GitHub Pages does not honor a repository `_headers` file.
+
 ## Editable resume
 
 The website links to **`assets/docs/resume/generated/resume.pdf`**.
@@ -83,7 +108,10 @@ Enable the versioned hooks once per clone, from the repository root:
 git config --local core.hooksPath .githooks
 ```
 
-Both commits and pushes run `render.py`. The pre-commit hook stages only
+Both commits and pushes run `render.py`, then rebuild the complete production
+site in ignored `_site/` using `scripts/build_site.py`. The site build uses the
+working tree (including unstaged site edits); its output is never staged.
+The pre-commit hook stages only
 `assets/docs/resume/generated/resume.pdf`, including it in the commit if it
 changed. The pre-push hook also regenerates and stages the PDF, but blocks
 the push if resume files still need committing. Commit those changes and
@@ -92,7 +120,8 @@ push again; the hook never creates commits automatically.
 Stage or stash edits to resume sources before committing or pushing:
 hooks refuse to generate from unstaged source changes, preserving partial
 staging rather than silently including excluded content. Other staged files
-are left alone. Missing dependencies or export failures stop the operation.
+are left alone. Missing dependencies, export failures, or site build failures
+stop the operation.
 Hooks prefer `assets/docs/resume/.venv/bin/python`, otherwise `python3` or
 `python`; install the requirements using the setup above. `CHROME_BIN`
 can specify the browser executable.

@@ -24,6 +24,9 @@ echo "Regenerating resume..." >&2
 "$python" "$resume/render.py"
 git add -- "$resume/generated/resume.pdf"
 
+echo "Building production site..." >&2
+"$python" scripts/build_site.py
+
 if [ "$1" = push ] && ! git diff --cached --quiet HEAD -- "$resume"; then
     echo "Resume changes are not committed. The regenerated PDF is staged; commit the resume changes, then push again." >&2
     exit 1
