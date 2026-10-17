@@ -1,0 +1,30 @@
+#!/bin/sh
+set -eu
+
+cd "$(git rev-parse --show-toplevel)"
+resume=assets/docs/resume
+
+# Do not stage a PDF built from source edits excluded from this commit.
+if ! git diff --quiet -- \
+    "$resume/resume.yaml" "$resume/template.html" "$resume/resume.css" \
+    "$resume/render.py" "$resume/requirements.txt" "$resume/fonts"; then
+    echo "Resume sources have unstaged changes. Stage or stash them before committing or pushing." >&2
+    exit 1
+fi
+
+if [ -x "$resume/.venv/bin/python" ]; then
+    python="$resume/.venv/bin/python"
+elif command -v python3 >/dev/null 2>&1; then
+    python=python3
+else
+    python=python
+fi
+
+echo "Regenerating resume..." >&2
+"$python" "$resume/render.py"
+git add -- "$resume/generated/resume.pdf"
+
+if [ "$1" = push ] && ! git diff --cached --quiet HEAD -- "$resume"; then
+    echo "Resume changes are not committed. The regenerated PDF is staged; commit the resume changes, then push again." >&2
+    exit 1
+fi

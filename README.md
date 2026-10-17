@@ -45,6 +45,78 @@ python3 -m http.server 8080
 
 Then open `http://localhost:8080/`.
 
+## Editable resume
+
+The website links to **`assets/docs/resume/generated/resume.pdf`**.
+Its editable source is **`assets/docs/resume/resume.yaml`**. Change the YAML
+to update the content; `resume.css` and `template.html` control the layout.
+The template reproduces the original's US Letter page, centered header,
+teal links, underlined roles, italic descriptions, and compact career history.
+
+One-time setup (Python 3.9+ and Chrome, Chromium, or Edge):
+
+```sh
+cd assets/docs/resume
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+After editing the YAML, export with:
+
+```sh
+python render.py
+```
+
+This creates `generated/resume.pdf` and a self-contained
+`generated/resume.html` preview. The generated PDF is tracked by Git and is
+the website's resume download; the HTML preview
+and variant outputs are ignored. PDF timestamps are removed so rerendering
+unchanged content with the same browser does not create timestamp-only diffs.
+Commit and push the regenerated PDF to publish an updated resume.
+
+### Git hooks
+
+Enable the versioned hooks once per clone, from the repository root:
+
+```sh
+git config --local core.hooksPath .githooks
+```
+
+Both commits and pushes run `render.py`. The pre-commit hook stages only
+`assets/docs/resume/generated/resume.pdf`, including it in the commit if it
+changed. The pre-push hook also regenerates and stages the PDF, but blocks
+the push if resume files still need committing. Commit those changes and
+push again; the hook never creates commits automatically.
+
+Stage or stash edits to resume sources before committing or pushing:
+hooks refuse to generate from unstaged source changes, preserving partial
+staging rather than silently including excluded content. Other staged files
+are left alone. Missing dependencies or export failures stop the operation.
+Hooks prefer `assets/docs/resume/.venv/bin/python`, otherwise `python3` or
+`python`; install the requirements using the setup above. `CHROME_BIN`
+can specify the browser executable.
+
+Use `--input other.yaml --output generated/other.pdf` for variants, or
+`--browser /path/to/chrome` if browser detection fails. `--html-only`
+generates just the HTML; open it in a browser and **Print → Save as PDF**
+with Letter paper, 100% scale, CSS/default margins, and headers/footers off.
+The layout targets one page with the supplied content; longer content can
+flow onto additional pages rather than being clipped or silently shrunk.
+
+YAML paragraphs use `>-` to fold multiple source lines into a single paragraph.
+Quote dates (including single years). Duplicate an earlier-role entry or a
+publication bullet to add items. Publication bullets contain text fragments
+with optional `style: bold`, `style: italic`, or `url`; other fields are plain
+text, not Markdown/HTML. Content and link attributes are HTML-escaped.
+
+The bundled [Carlito fonts](https://github.com/google/fonts/tree/main/ofl/carlito)
+are Calibri-compatible and distributed under `assets/docs/resume/fonts/OFL.txt`.
+They are embedded in the HTML/PDF for consistent output without network access
+or a Calibri installation. Font rendering may differ slightly from the Word
+original. The PDF's malformed Github link is corrected to the portfolio's
+existing GitHub profile; the resume's wording is otherwise retained.
+
 ## Accessibility & motion
 
 - Respects `prefers-reduced-motion`, plus an explicit, persisted motion

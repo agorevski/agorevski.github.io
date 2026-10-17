@@ -387,7 +387,7 @@
       { label: "Expertise", hint: "section", go: "matrix" },
       { label: "Field Notes", hint: "section", go: "notes" },
       { label: "Contact", hint: "section", go: "contact" },
-      { label: "View resume (PDF)", hint: "document", url: "/assets/docs/Alex_Gorevski_Resume_2025.pdf" },
+      { label: "View resume (PDF)", hint: "document", url: "/assets/docs/resume/generated/resume.pdf" },
       { label: "Toggle motion effects", hint: "action", run: function () { document.getElementById("motionToggle").click(); } },
       { label: "Open GitHub profile", hint: "external", url: "https://github.com/agorevski/" },
       { label: "Open LinkedIn profile", hint: "external", url: "https://www.linkedin.com/in/alexgorevski/" }

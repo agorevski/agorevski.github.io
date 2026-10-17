@@ -1,0 +1,92 @@
+# Edit the content here, then run: python render.py
+# Use >- for paragraphs that span several YAML lines. Dates must be quoted.
+name: Alex Gorevski
+contact:
+  - text: alex.gorevski@live.com
+    url: mailto:alex.gorevski@live.com
+  - text: (585) 978 - 0110
+  - text: LinkedIn
+    url: https://www.linkedin.com/in/alexgorevski/
+  - text: Github
+    url: https://github.com/agorevski/
+  - text: Website
+    url: https://www.alexgorevski.com/
+
+summary: >-
+  Industry veteran with 18 years of experience delivering high-impact systems, now focused on applied AI. I thrive in roles
+  where I can combine deep engineering ability with modern AI capabilities to drive excellence and deliver clear value.
+
+experience:
+  heading: Experience
+  current:
+    title: Microsoft – Responsible AI – Principal SDE
+    dates: "2022 – Present"
+    highlights:
+      - >-
+        Co-developed a custom E2E model onboarding platform (patent pending) for onboarding RAI models, including fine-tuning,
+        quantization, perf tuning, and regional deployment infrastructure on the AML stack.
+      - >-
+        Co-authored an ML model/paper for steganographic image watermarking (arXiv:2411.07795), enhancing the open
+        standards of C2PA for traceability & outperforming Google’s SynthID (arXiv:2510.09263, pg. 21).
+      - >-
+        Optimized in-house image classification and code vulnerability models, cutting >$10M/year in COGs and reducing P99
+        latency 3× through quantization, hardware-aware optimizations, and efficient data handling, lowering GPU requirements
+        from A100 to T4.
+      - >-
+        Developed the model analysis & inference infrastructure for a low-data text classification pipeline (patent pending) to
+        enable customers to create custom topic classifiers outside of the scope of traditional RAI classifiers within minutes
+        leveraging LEC techniques to improve precision / recall, while significantly increasing throughput.
+  earlier_note: My LinkedIn profile has all the salient details about my earlier positions below.
+  earlier:
+    - title: Microsoft – Analog Data Insights – HoloLens – Principal SDE
+      dates: "2017 – 2022"
+      description: Created tooling & insights over Petabyte-scale telemetry data through a C# domain-specific-language.
+    - title: Microsoft – Analog Analysis Platform – HoloLens – Senior SDE
+      dates: "2015 – 2017"
+      description: Refined an ML testing platform for reliability, scalability, and performance on Azure.
+    - title: Microsoft – Analog Insights and Efficiency – HoloLens – Senior SDE
+      dates: "2013 – 2015"
+      description: Co-developed the organization’s first HPC cluster for Ground Truth Analysis on Azure.
+    - title: Microsoft – Windows Inbox Applications – Calendar – SDET II
+      dates: "2012 – 2013"
+      description: Developed test infrastructure for third party developer APIs used by the Windows 8 Calendar app.
+    - title: Microsoft – Windows Live Communications – Platform – SDET / SDET II
+      dates: "2008 – 2012"
+      description: I owned the test infrastructure for the entire sync stack across all Windows Live Client Applications.
+    - title: Savant Systems – Hardware Engineering – Intern
+      dates: "2007"
+      description: Designed PCBs and programmed firmware for a suite of home automation products.
+    - title: Paychex – Quality Assurance – Intern
+      dates: "2006"
+      description: Evaluated releases of internal payroll software, replacing the aging COBOL solution.
+
+publications:
+  heading: Publications & Patents
+  # Each bullet is a list of text fragments. Optional style: bold or italic.
+  # Optional url makes that fragment a link. No HTML or Markdown is needed.
+  items:
+    - - text: "InvisMark: Invisible and Robust Watermarking for AI-generated Image Provenance,"
+        style: italic
+      - text: " arXiv: "
+      - text: "2411.07795"
+        url: https://arxiv.org/pdf/2411.07795
+      - text: ", 2024 – Co-author. Developed gradient-resistant watermarking."
+    - - text: US12423949B2
+        style: bold
+      - text: " – Knowledge-Driven Pre-Trained Form Key Mapping (Awarded 09/25)"
+    - - text: US20250356123A1
+        style: bold
+      - text: " – Training and Applying a Key Sentence Classifier Model (Published 10/25)"
+    - - text: User-Defined Topic Classification and Moderation
+        style: italic
+      - text: " (Filed 12/25)"
+    - - text: Intellectual Property Risk Detection in Code Snippets – Evaluation and Iteration
+        style: italic
+      - text: " (Filed 12/25)"
+    - - text: Customer-Driven Responsible AI Model Update Framework
+        style: italic
+      - text: " (Filed 06/25)"
+
+education:
+  heading: Education – Rochester Institute of Technology – Class of 2008
+  description: Bachelor of Science – Computer Engineering w. Software Eng. Option – PFOS GPA 3.62/4.0

@@ -1,0 +1,122 @@
+@font-face {
+  font-family: Resume;
+  font-style: normal;
+  font-weight: 400;
+  src: url("data:font/ttf;base64,$regular") format("truetype");
+}
+@font-face {
+  font-family: Resume;
+  font-style: normal;
+  font-weight: 700;
+  src: url("data:font/ttf;base64,$bold") format("truetype");
+}
+@font-face {
+  font-family: Resume;
+  font-style: italic;
+  font-weight: 400;
+  src: url("data:font/ttf;base64,$italic") format("truetype");
+}
+@font-face {
+  font-family: Resume;
+  font-style: italic;
+  font-weight: 700;
+  src: url("data:font/ttf;base64,$bold_italic") format("truetype");
+}
+
+@page {
+  size: letter;
+  margin: 36pt;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: #404040;
+  font: 11.04pt / 14.3pt Resume, Calibri, sans-serif;
+}
+h1, h2, h3, p, ul { margin: 0; }
+header { text-align: center; }
+h1 {
+  color: #0d0d0d;
+  font-size: 24pt;
+  line-height: 29pt;
+  text-decoration: underline;
+  text-underline-offset: 3pt;
+}
+.contact {
+  margin-top: 3pt;
+  font-weight: 700;
+}
+a { color: #467885; }
+.contact a { text-decoration: none; }
+.summary { margin-top: 9pt; }
+h2 {
+  font-size: 16pt;
+  line-height: 20pt;
+  margin-bottom: 1pt;
+  break-after: avoid;
+}
+section { margin-top: 11pt; }
+.role-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12pt;
+  break-after: avoid;
+}
+h3 {
+  font-size: 12pt;
+  line-height: 15pt;
+  text-decoration: underline;
+  text-underline-offset: 2pt;
+}
+.dates {
+  flex-shrink: 0;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.current .dates {
+  font-size: 12pt;
+  margin-right: 40pt;
+}
+.current p {
+  margin-top: 7.5pt;
+  font-style: italic;
+  orphans: 2;
+  widows: 2;
+}
+.current .role-heading + p { margin-top: 0; }
+.earlier-note {
+  margin: 8pt 0 14pt;
+  text-align: center;
+  font-weight: 700;
+  font-style: italic;
+}
+.earlier { margin-left: 5pt; }
+.earlier article { break-inside: avoid; }
+.earlier .dates, .earlier p { font-style: italic; }
+.earlier .role-heading, .earlier h3, .earlier p { line-height: 14.05pt; }
+.publications { margin-top: 15pt; }
+ul { padding-left: 18pt; }
+li {
+  padding-left: 0;
+  line-height: 14.5pt;
+  break-inside: avoid;
+}
+.education {
+  margin-top: 14pt;
+  break-inside: avoid;
+}
+.education p { font-weight: 700; }
+
+@media screen {
+  html { background: #e9e9e9; }
+  body {
+    width: 612pt;
+    min-height: 792pt;
+    padding: 36pt;
+    margin: 24px auto;
+    background: white;
+    box-shadow: 0 2px 12px #0002;
+  }
+}
